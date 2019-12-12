@@ -61,6 +61,12 @@ $$
 
 **BRIEF**(Binary Robust Independent Elementary Feature)，是一种二进制描述子，描述向量是由许多个0和1组成，这里的0和1编码了**关键点附近的两个像素**$p$和$q$的大小关系，如果$p>q$,则取1；反之取0。具体像素的挑选是按照某个特定的分布进行随机，具体可以查看OpenCV代码或者原论文。
 
+BRIEF & rBRIEF [Ref](https://raw.githubusercontent.com/ez4lionky/Markdown-Pictures/master/2019-12-12Visual-SLAM/img2.png):
+
+![BRIEF](https://raw.githubusercontent.com/ez4lionky/Markdown-Pictures/master/2019-12-12Visual-SLAM/img2.png)
+
+![rBRIEF](https://raw.githubusercontent.com/ez4lionky/Markdown-Pictures/master/2019-12-12Visual-SLAM/img3.png)
+
 #### 1.2 特征匹配
 
 特征点是具有代表性的点（相当于人现实世界定位时使用的参照物），而特征匹配解决了SLAM中的数据关联问题(data association)，即确定当前帧的图像特征与前一帧的图像对应关系，通过描述子的差异判断哪些特征为同一个点。再使用相同特征点的相对位置关系，就可以计算出RT（对极几何）。
@@ -129,6 +135,14 @@ $$
 
 #### 2.2 单应矩阵
 
-除了基本矩阵和本质矩阵之外，还有**单应矩阵**（Homography）$H$，其描述了两个平面之间的映射关系。若场景中的特征点都落在一个平面上，。
+除了基本矩阵和本质矩阵之外，还有**单应矩阵**（Homography）$H$，其描述了两个平面之间的映射关系。
+
+**单应(Homography)**是射影几何中的概念，又称为射影变换。它把一个射影平面上的点(三维齐次矢量)映射到另一个射影平面上，并且把直线映射为直线，具有保线性质。总的来说，单应是关于三维齐次矢量的一种线性变换，可以用一个$3\times3$的非奇异矩阵$H$表示。
+
+若场景中的特征点都落在一个平面上，(比如墙、地面，使用无人机)，则可以通过单应性进行运动估计。
+
+考虑在图像$I_1, I_2$有一对匹配好的特征点$p_1, p_2$。假设这些特征点落在平面$P$上，设这个平面满足方程：
+
+
 
 ***注：本文中书指代《视觉SLAM十四讲》***
